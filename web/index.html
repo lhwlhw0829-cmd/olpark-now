@@ -249,8 +249,8 @@ function lineChart(svg, prof) {
 }
 
 function dayPlan(d) {
-  // arrival window: 09h until the earliest big show starts (or 20h); late-night lows aren't useful advice
-  const win = d.hours.filter(h => h.hour >= 9 && h.hour < (d.start || 21));
+  // arrival window: the 3 hours before a big show (earlier is a wasted day), else 09–20h
+  const win = d.hours.filter(h => d.start ? h.hour >= d.start - 3 && h.hour < d.start : h.hour >= 9 && h.hour < 21);
   return { best: win.reduce((a,c) => c.cars < a.cars ? c : a),
            peak: d.hours.reduce((a,c) => c.cars > a.cars ? c : a),
            full: d.hours.filter(h => h.grade === "만차") };
