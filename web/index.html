@@ -353,6 +353,8 @@ $("grid").addEventListener("click", e => { const i = e.target.closest("[data-i]"
 document.querySelector(".tabs").addEventListener("click", e => { const b = e.target.closest("[data-tab]"); if (b) { tab = b.dataset.tab; render(); } });
 $("lang").onchange = e => { lang = e.target.value; render(); };
 $("ics").onclick = downloadIcs; $("share").onclick = share;
+// ?embed=1: content only (no header, KPIs or tabs) for embedding in other pages and documents
+if (P.get("embed")) document.querySelectorAll("header, #kpis, .tabs").forEach(e => e.hidden = true);
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => F && render());
 fetch("data/forecast.json").then(r => r.json()).then(f => {
   F = f;
