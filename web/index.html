@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>올팍 나우 · OlPark Now</title>
+<style>
+  :root { --bg:#f7f7f5; --fg:#1d1d1b; --mute:#6b6b66; --line:#e3e2dd; --card:#fff;
+          --ok:#9fc9ad; --busy:#d99a1e; --full:#c8463d; --accent:#2f5d8a; --accent2:#b9b8b2; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#1a1a18; --fg:#ecebe6; --mute:#9d9c96; --line:#33322f; --card:#232320; --ok:#3d6b4c; --accent:#7fb0e0; --accent2:#5d5c57; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font:15px/1.5 system-ui,-apple-system,"Apple SD Gothic Neo","Hiragino Sans","PingFang SC",sans-serif; background:var(--bg); color:var(--fg); }
+  main { max-width:920px; margin:0 auto; padding:20px 16px 56px; }
+  header { display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+  h1 { font-size:22px; margin:0; } h2 { font-size:17px; margin:32px 0 6px; } h3 { font-size:14px; margin:0 0 8px; }
+  .mute { color:var(--mute); font-size:13px; } .lead { margin:0 0 12px; color:var(--mute); font-size:14px; }
+  button, select { font:inherit; }
+  select.lang, .btn { background:var(--card); border:1px solid var(--line); color:var(--fg); border-radius:6px; padding:5px 10px; cursor:pointer; }
+  .btn:hover { border-color:var(--fg); }
+  .note { background:#f9eeda; color:#6b4a0c; border-radius:8px; padding:8px 12px; margin:14px 0 0; font-size:13px; }
+  .tabs { display:flex; gap:4px; margin-top:18px; border-bottom:1px solid var(--line); }
+  .tabs button { background:none; border:0; border-bottom:2px solid transparent; padding:8px 12px; color:var(--mute); cursor:pointer; }
+  .tabs button[aria-selected=true] { color:var(--fg); border-color:var(--fg); font-weight:600; }
+  .kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:16px; }
+  .kpi { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px 12px; }
+  .kpi b { display:block; font-size:20px; } .kpi span { font-size:12px; color:var(--mute); }
+  .grid { display:grid; grid-template-columns:84px repeat(16,1fr); gap:2px; font-size:11px; }
+  .grid .h { text-align:center; color:var(--mute); }
+  .grid .d { padding:4px 6px 4px 0; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .grid .d.sel { font-weight:700; }
+  .grid .c { height:26px; border-radius:3px; cursor:pointer; }
+  .c.원활 { background:var(--ok); } .c.혼잡 { background:var(--busy); } .c.만차 { background:var(--full); }
+  .grid .c.sel { outline:2px solid var(--fg); outline-offset:-2px; }
+  .legend { display:flex; gap:14px; margin-top:8px; font-size:12px; color:var(--mute); flex-wrap:wrap; }
+  .legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:4px; vertical-align:-1px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; margin-top:12px; }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .big { font-size:20px; font-weight:700; }
+  ul.tips { margin:8px 0 0; padding-left:18px; } ul.tips li { margin:5px 0; }
+  .actions { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
+  .ev { color:var(--full); font-size:10px; }
+  .shows { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; }
+  .show .venue { font-size:12px; color:var(--mute); } .show b { display:block; margin:2px 0 6px; }
+  .show .hist { margin-top:10px; padding-top:10px; border-top:1px dashed var(--line); font-size:13px; }
+  .tag { display:inline-block; font-size:11px; padding:1px 6px; border-radius:4px; background:var(--line); color:var(--mute); margin-left:4px; }
+  a { color:var(--accent); }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th, td { text-align:left; padding:7px 6px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--mute); font-weight:500; } td.n { text-align:right; font-variant-numeric:tabular-nums; }
+  .pill { display:inline-block; padding:1px 8px; border-radius:10px; font-size:12px; color:#fff; }
+  .pill.만차 { background:var(--full); } .pill.혼잡 { background:var(--busy); } .pill.원활 { background:#3a8f5c; }
+  svg text { fill:var(--mute); font-size:11px; }
+  .toast { position:fixed; left:50%; bottom:24px; transform:translateX(-50%); background:var(--fg); color:var(--bg); padding:8px 14px; border-radius:8px; font-size:13px; }
+  [hidden] { display:none !important; }
+  @media (max-width:640px) { .kpis { grid-template-columns:repeat(2,1fr); } .two { grid-template-columns:1fr; } .grid { grid-template-columns:56px repeat(16,1fr); font-size:9px; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div><h1 data-t="title"></h1><div class="mute" data-t="sub"></div></div>
+    <select class="lang" id="lang" aria-label="Language">
+      <option value="ko">한국어</option><option value="en">English</option><option value="ja">日本語</option><option value="zh">中文</option>
+    </select>
+  </header>
+  <div class="note" id="note" hidden></div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="visitor" aria-selected="true" data-t="tVisitor"></button>
+    <button role="tab" data-tab="ops" data-t="tOps"></button>
+    <button role="tab" data-tab="data" data-t="tData"></button>
+  </nav>
+
+  <section data-panel="visitor">
+    <h2 data-t="week"></h2>
+    <p class="lead" data-t="weekLead"></p>
+    <div class="grid" id="grid"></div>
+    <div class="legend" id="legend"></div>
+
+    <h2 id="dayTitle"></h2>
+    <div class="two">
+      <div class="card"><h3 data-t="hourly"></h3><svg id="dayChart" viewBox="0 0 420 200" width="100%" role="img"></svg></div>
+      <div class="card"><div id="advice"></div>
+        <div class="actions"><button class="btn" id="ics" data-t="addCal"></button><button class="btn" id="share" data-t="share"></button></div>
+      </div>
+    </div>
+    <div id="showsWrap"><h2 data-t="showsT"></h2><div class="shows" id="shows"></div></div>
+  </section>
+
+  <section data-panel="ops" hidden>
+    <h2 data-t="opsTitle"></h2>
+    <p class="lead" data-t="opsLead"></p>
+    <div class="card"><table id="opsTable"></table></div>
+  </section>
+
+  <section data-panel="data" hidden>
+    <h2 data-t="showEff"></h2>
+    <p class="lead" id="showLead"></p>
+    <div class="card"><svg id="profileChart" viewBox="0 0 640 220" width="100%" role="img"></svg>
+      <div class="legend"><span><i style="background:var(--accent)"></i><span data-t="showDay"></span></span><span><i style="background:var(--accent2)"></i><span data-t="noShowDay"></span></span></div>
+    </div>
+    <div class="two">
+      <div class="card"><h3 data-t="rainT"></h3><div id="rain"></div></div>
+      <div class="card"><h3 data-t="accT"></h3><div id="acc"></div></div>
+    </div>
+    <h2 data-t="topT"></h2>
+    <div class="card"><table id="topTable"></table></div>
+    <p class="mute" id="meta"></p>
+  </section>
+</main>
+<div class="toast" id="toast" hidden></div>
+<script>
+const T = {
+  ko: { title:"올팍 나우", sub:"올림픽공원 주차 혼잡 예보 · 공연·날씨·입출차 연계 데이터 기반", locale:"ko-KR",
+        tVisitor:"방문객", tOps:"운영자", tData:"데이터 근거",
+        week:"7일 혼잡 예보", weekLead:"칸을 누르면 그날의 시간대별 예상 주차 대수와 추천을 볼 수 있습니다.",
+        hourly:"시간대별 예상 주차 대수", 원활:"원활", 혼잡:"혼잡", 만차:"만차", cars:"대", show:"공연",
+        best:"추천 도착 시각", peak:"혼잡 피크",
+        transit:"만차 예상 시간대에는 지하철 5·9호선 올림픽공원역 또는 8호선 몽촌토성역을 이용하세요.",
+        exit:t=>`공연은 ${t} 전후 종료 예상입니다. 종료 직후에 출차가 몰리니, 공원을 잠시 둘러본 뒤 출차하면 대기를 피할 수 있습니다.`,
+        noPeak:"종일 원활할 것으로 예상됩니다.", fullHours:n=>`만차 예상 ${n}시간`,
+        addCal:"캘린더에 추가", share:"링크 공유", copied:"링크를 복사했습니다", calTitle:"올림픽공원 도착 (올팍 나우 추천)",
+        showsT:"이날 올림픽공원 공연", start:"시작", official:"공식 안내", smallHall:"소규모 공연장",
+        hist:"같은 아티스트 2025년 공연 때", histRow:(d,h,c)=>`${d} · ${h} 최고 ${c}대`, noHist:"2025년 이 아티스트 공연 기록이 없습니다.",
+        demo:"데모 데이터로 만든 화면입니다. 실제 예측이 아닙니다.",
+        kRows:"학습한 시간대 데이터", kShows:"학습 데이터 속 공연", kPeak:"연중 최고 주차 대수", kFull:"만차 기준(상위 10%)",
+        opsTitle:"주간 운영 권고", opsLead:"날짜별 피크와 만차 시간을 보고 인력·임시주차장 배치를 미리 정할 수 있습니다.",
+        oDate:"날짜", oPeak:"피크", oFull:"만차 시간", oAct:"권고",
+        actFull:"임시주차장 개방 + 출차 유도 인력 배치", actBusy:"주차 안내 인력 증원", actOk:"평시 운영",
+        showEff:"공연이 있는 평일 저녁, 주차가 크게 늘어납니다",
+        showLead:(h,a,b,p)=>`평일 ${h}시 평균: 공연일 ${a}대, 비공연일 ${b}대 (+${p}%).`,
+        showDay:"공연일 (평일)", noShowDay:"비공연일 (평일)",
+        rainT:"비 오는 주말 낮 (10~18시)", rainTxt:(w,d,p)=>`평균 ${w}대 · 맑은 날 ${d}대 대비 ${p}%`,
+        accT:"예측 정확도 (백테스트)",
+        accTxt:b=>`1~7월로 학습, ${b.test} ${b.n}시간 검증. 평균 오차 ${b.mae_model}대 (지난주 같은 시간 기준 ${b.mae_naive}대). 평균 주차 대수 ${b.mean_cars}대.`,
+        accNext:"수집 오류일(일 최고 1,000대 미만·하루 20시간 미만 기록)을 걸러내 오차를 674대에서 줄였습니다. 날씨·공연 규모를 넣은 그래디언트 부스팅도 시험했지만 2025년 240일 데이터로는 개선이 없어, 설명하기 쉬운 평균 모델을 씁니다.",
+        topT:"2025년 가장 붐볐던 날", tDate:"날짜", tPeak:"최고", tHour:"시각", tShow:"공연",
+        meta:(n,g)=>`학습 ${n}시간 (2025년, 수집 오류일 제외) · 생성 ${g} · 출처: 한국체육산업개발 올림픽공원 차량입출차·공연·날씨 연계 데이터, 올림픽공원 공연 일정` },
+  en: { title:"OlPark Now", sub:"Olympic Park parking forecast · built on linked parking, show and weather data", locale:"en-US",
+        tVisitor:"Visitors", tOps:"Operators", tData:"Evidence",
+        week:"7-day forecast", weekLead:"Tap a cell to see that day's expected cars by hour and what to do.",
+        hourly:"Expected parked cars by hour", 원활:"Free", 혼잡:"Busy", 만차:"Full", cars:"cars", show:"Show",
+        best:"Suggested arrival", peak:"Peak",
+        transit:"When the lot is expected to be full, take Line 5 or 9 to Olympic Park, or Line 8 to Mongchontoseong.",
+        exit:t=>`The show should end around ${t}. Exits pile up right after it, so a short walk in the park before leaving avoids the queue.`,
+        noPeak:"Expected to stay free all day.", fullHours:n=>`${n} full hour(s) expected`,
+        addCal:"Add to calendar", share:"Share link", copied:"Link copied", calTitle:"Arrive at Olympic Park (OlPark Now)",
+        showsT:"Shows at Olympic Park this day", start:"Starts", official:"Official page", smallHall:"small hall",
+        hist:"When this artist played here in 2025", histRow:(d,h,c)=>`${d} · peak ${c} cars at ${h}`, noHist:"No show by this artist here in 2025.",
+        demo:"Built on demo data. These are not real predictions.",
+        kRows:"hours of training data", kShows:"shows in training data", kPeak:"peak parked cars", kFull:"'Full' threshold (top 10%)",
+        opsTitle:"Weekly operating advice", opsLead:"Plan staff and overflow parking from each day's peak and full hours.",
+        oDate:"Date", oPeak:"Peak", oFull:"Full hours", oAct:"Advice",
+        actFull:"Open overflow lot + exit-flow staff", actBusy:"Add parking guides", actOk:"Normal operation",
+        showEff:"Weekday shows sharply raise evening parking",
+        showLead:(h,a,b,p)=>`Weekday ${h}:00 average: ${a} cars on show days vs ${b} otherwise (+${p}%).`,
+        showDay:"Show day (weekday)", noShowDay:"No show (weekday)",
+        rainT:"Rainy weekend daytime (10–18h)", rainTxt:(w,d,p)=>`Average ${w} cars · ${p}% vs dry days (${d})`,
+        accT:"Forecast accuracy (backtest)",
+        accTxt:b=>`Trained on Jan–Jul, tested on ${b.test} (${b.n} hours). Mean error ${b.mae_model} cars (same hour last week: ${b.mae_naive}). Mean parked cars ${b.mean_cars}.`,
+        accNext:"Filtering broken collection days (daily peak under 1,000 cars or under 20 hours recorded) cut the error from 674 cars. Gradient boosting with weather and show size gave no gain on 240 days of data, so the explainable average model stays.",
+        topT:"Busiest days of 2025", tDate:"Date", tPeak:"Peak", tHour:"Hour", tShow:"Show",
+        meta:(n,g)=>`${n} training hours (2025, excluding broken collection days) · generated ${g} · sources: KSPO Olympic Park linked parking/show/weather data, Olympic Park event schedule` },
+  ja: { title:"オルパク・ナウ", sub:"オリンピック公園 駐車場混雑予報 · 公演・天気・入出庫データに基づく", locale:"ja-JP",
+        tVisitor:"来場者", tOps:"運営者", tData:"データの根拠",
+        week:"7日間の混雑予報", weekLead:"マスをタップすると、その日の時間帯別の予想駐車台数とおすすめが見られます。",
+        hourly:"時間帯別の予想駐車台数", 원활:"空き", 혼잡:"混雑", 만차:"満車", cars:"台", show:"公演",
+        best:"おすすめ到着時刻", peak:"混雑ピーク",
+        transit:"満車が予想される時間帯は、地下鉄5・9号線オリンピック公園駅または8号線夢村土城駅をご利用ください。",
+        exit:t=>`公演は${t}ごろ終了予定です。終了直後は出庫が集中するため、公園を少し散策してから出庫すると待ち時間を避けられます。`,
+        noPeak:"終日空いている見込みです。", fullHours:n=>`満車予想 ${n}時間`,
+        addCal:"カレンダーに追加", share:"リンクを共有", copied:"リンクをコピーしました", calTitle:"オリンピック公園到着(オルパク・ナウ推奨)",
+        showsT:"この日のオリンピック公園の公演", start:"開演", official:"公式案内", smallHall:"小規模会場",
+        hist:"同じアーティストの2025年公演時", histRow:(d,h,c)=>`${d} · ${h} 最大${c}台`, noHist:"2025年にこのアーティストの公演記録はありません。",
+        demo:"デモデータによる画面です。実際の予測ではありません。",
+        kRows:"学習した時間帯データ", kShows:"学習データ内の公演", kPeak:"年間最大駐車台数", kFull:"満車基準(上位10%)",
+        opsTitle:"週間運営アドバイス", opsLead:"日別のピークと満車時間から、人員・臨時駐車場の配置を事前に決められます。",
+        oDate:"日付", oPeak:"ピーク", oFull:"満車時間", oAct:"アドバイス",
+        actFull:"臨時駐車場を開放 + 出庫誘導の人員配置", actBusy:"駐車案内の人員を増員", actOk:"通常運営",
+        showEff:"公演のある平日の夜は駐車が大きく増えます",
+        showLead:(h,a,b,p)=>`平日${h}時の平均:公演日${a}台、公演なし${b}台 (+${p}%)。`,
+        showDay:"公演日(平日)", noShowDay:"公演なし(平日)",
+        rainT:"雨の週末の日中(10〜18時)", rainTxt:(w,d,p)=>`平均${w}台 · 晴れの日${d}台比 ${p}%`,
+        accT:"予測精度(バックテスト)",
+        accTxt:b=>`1〜7月で学習し、${b.test}の${b.n}時間で検証。平均誤差${b.mae_model}台(先週同時刻基準は${b.mae_naive}台)。平均駐車台数${b.mean_cars}台。`,
+        accNext:"収集エラー日(1日の最大1,000台未満・記録20時間未満)を除外し、誤差を674台から減らしました。天気・公演規模を入れた勾配ブースティングも試しましたが、240日分のデータでは改善がなく、説明しやすい平均モデルを使っています。",
+        topT:"2025年に最も混んだ日", tDate:"日付", tPeak:"最大", tHour:"時刻", tShow:"公演",
+        meta:(n,g)=>`学習${n}時間(2025年、収集エラー日を除外) · 生成 ${g} · 出典:韓国体育産業開発 オリンピック公園 入出庫・公演・天気連携データ、オリンピック公園公演日程` },
+  zh: { title:"奥林匹克公园 停车预报", sub:"奥林匹克公园停车拥堵预报 · 基于演出、天气与车辆进出数据", locale:"zh-CN",
+        tVisitor:"访客", tOps:"运营方", tData:"数据依据",
+        week:"7天拥堵预报", weekLead:"点击格子即可查看当天各时段的预计停车数量和建议。",
+        hourly:"各时段预计停车数量", 원활:"畅通", 혼잡:"拥挤", 만차:"已满", cars:"辆", show:"演出",
+        best:"建议到达时间", peak:"拥堵高峰",
+        transit:"预计车位已满的时段,请乘坐地铁5号线·9号线奥林匹克公园站或8号线梦村土城站。",
+        exit:t=>`演出预计在${t}左右结束。结束后车辆集中驶出,建议先在公园逛一逛再离场,可避免排队。`,
+        noPeak:"预计全天畅通。", fullHours:n=>`预计已满 ${n} 小时`,
+        addCal:"添加到日历", share:"分享链接", copied:"链接已复制", calTitle:"到达奥林匹克公园(停车预报建议)",
+        showsT:"当天奥林匹克公园的演出", start:"开场", official:"官方信息", smallHall:"小型场馆",
+        hist:"同一艺人2025年演出时", histRow:(d,h,c)=>`${d} · ${h} 最多${c}辆`, noHist:"2025年没有该艺人的演出记录。",
+        demo:"本页面使用演示数据,并非实际预测。",
+        kRows:"训练用时段数据", kShows:"训练数据中的演出", kPeak:"全年最高停车数量", kFull:"已满标准(前10%)",
+        opsTitle:"每周运营建议", opsLead:"根据每天的高峰和已满时段,提前安排人员与临时停车场。",
+        oDate:"日期", oPeak:"高峰", oFull:"已满时段", oAct:"建议",
+        actFull:"开放临时停车场 + 安排离场引导人员", actBusy:"增加停车引导人员", actOk:"正常运营",
+        showEff:"有演出的工作日晚上,停车量大幅增加",
+        showLead:(h,a,b,p)=>`工作日${h}点平均:演出日${a}辆,无演出日${b}辆(+${p}%)。`,
+        showDay:"演出日(工作日)", noShowDay:"无演出(工作日)",
+        rainT:"下雨的周末白天(10〜18点)", rainTxt:(w,d,p)=>`平均${w}辆 · 比晴天${d}辆 ${p}%`,
+        accT:"预测精度(回测)",
+        accTxt:b=>`用1〜7月训练,在${b.test}的${b.n}小时上验证。平均误差${b.mae_model}辆(以上周同一时间为基准为${b.mae_naive}辆)。平均停车数量${b.mean_cars}辆。`,
+        accNext:"剔除数据采集异常日(当天最高不足1,000辆或记录不足20小时)后,误差从674辆下降。也试过加入天气和演出规模的梯度提升模型,但在240天的数据上没有改善,因此使用更易解释的平均模型。",
+        topT:"2025年最拥挤的日子", tDate:"日期", tPeak:"最高", tHour:"时间", tShow:"演出",
+        meta:(n,g)=>`训练${n}小时(2025年,已剔除采集异常日) · 生成于 ${g} · 来源:韩国体育产业开发 奥林匹克公园车辆进出·演出·天气关联数据、奥林匹克公园演出日程` },
+};
+const P = new URLSearchParams(location.search);
+let lang = T[P.get("lang")] ? P.get("lang") : "ko", F, sel = 0, tab = "visitor";
+const $ = id => document.getElementById(id), hh = h => `${String(h).padStart(2,"0")}:00`;
+const n = x => Math.round(x).toLocaleString(T[lang].locale);
+const dayLabel = d => new Date(d+"T00:00").toLocaleDateString(T[lang].locale,{month:"numeric",day:"numeric",weekday:"short"});
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function barChart(svg, hours) {
+  const W=420, H=200, L=40, B=22, top=10, max = Math.max(F.thresholds["만차"]*1.15, ...hours.map(h=>h.cars));
+  const y = v => top + (H-B-top) * (1 - v/max), bw = (W-L)/hours.length;
+  let s = "";
+  for (const k of ["혼잡","만차"]) { const yy=y(F.thresholds[k]);
+    s += `<line x1="${L}" x2="${W}" y1="${yy}" y2="${yy}" stroke="${css(k==="만차"?"--full":"--busy")}" stroke-dasharray="4 3"/><text x="${W-2}" y="${yy-3}" text-anchor="end">${T[lang][k]} ${n(F.thresholds[k])}</text>`; }
+  hours.forEach((h,i) => { s += `<rect x="${L+i*bw+2}" y="${y(h.cars)}" width="${bw-4}" height="${H-B-y(h.cars)}" rx="2" fill="${css(h.grade==="만차"?"--full":h.grade==="혼잡"?"--busy":"--ok")}"><title>${hh(h.hour)} · ${n(h.cars)} ${T[lang].cars}</title></rect>`;
+    if (i%2===0) s += `<text x="${L+i*bw+bw/2}" y="${H-6}" text-anchor="middle">${h.hour}</text>`; });
+  [0, Math.round(max/2/500)*500].forEach(v => s += `<text x="${L-6}" y="${y(v)+4}" text-anchor="end">${n(v)}</text>`);
+  svg.innerHTML = s;
+}
+
+function lineChart(svg, prof) {
+  const W=640, H=220, L=48, B=24, top=10, max = Math.max(...prof.flatMap(p=>[p.show||0,p.none||0]))*1.1;
+  const x = i => L + i*(W-L-10)/(prof.length-1), y = v => top + (H-B-top)*(1-v/max);
+  const path = k => prof.map((p,i)=>`${i?"L":"M"}${x(i)},${y(p[k])}`).join("");
+  let s = "";
+  [0,1000,2000].filter(v=>v<max).forEach(v => s += `<line x1="${L}" x2="${W-10}" y1="${y(v)}" y2="${y(v)}" stroke="${css("--line")}"/><text x="${L-6}" y="${y(v)+4}" text-anchor="end">${n(v)}</text>`);
+  s += `<path d="${path("none")}" fill="none" stroke="${css("--accent2")}" stroke-width="2.5"/><path d="${path("show")}" fill="none" stroke="${css("--accent")}" stroke-width="2.5"/>`;
+  prof.forEach((p,i) => { if (p.hour%3===0) s += `<text x="${x(i)}" y="${H-6}" text-anchor="middle">${hh(p.hour)}</text>`;
+    s += `<circle cx="${x(i)}" cy="${y(p.show)}" r="7" fill="transparent"><title>${hh(p.hour)} · ${T[lang].showDay} ${n(p.show)} / ${T[lang].noShowDay} ${n(p.none)}</title></circle>`; });
+  svg.innerHTML = s;
+}
+
+function dayPlan(d) {
+  // arrival window: 09h until the earliest big show starts (or 20h); late-night lows aren't useful advice
+  const win = d.hours.filter(h => h.hour >= 9 && h.hour < (d.start || 21));
+  return { best: win.reduce((a,c) => c.cars < a.cars ? c : a),
+           peak: d.hours.reduce((a,c) => c.cars > a.cars ? c : a),
+           full: d.hours.filter(h => h.grade === "만차") };
+}
+
+function shareUrl() {
+  const u = new URL(location.href); u.search = ""; u.searchParams.set("d", F.days[sel].date); u.searchParams.set("lang", lang); return u.toString();
+}
+
+function toast(msg) { const t = $("toast"); t.textContent = msg; t.hidden = false; setTimeout(() => t.hidden = true, 1800); }
+
+// KST (UTC+9, no DST) → UTC basic format, so no VTIMEZONE block is needed
+const utc = (date, h) => new Date(Date.parse(`${date}T00:00:00+09:00`) + h*3600e3).toISOString().replace(/[-:]/g,"").slice(0,15) + "Z";
+
+function downloadIcs() {
+  const t = T[lang], d = F.days[sel], { best, full } = dayPlan(d);
+  const ymd = d.date.replaceAll("-", ""), stamp = new Date().toISOString().replace(/[-:]/g,"").slice(0,15) + "Z";
+  const desc = [d.event ? `${t.show}: ${d.event}` : "", full.length ? t.transit : "", shareUrl()].filter(Boolean).join("\\n").replace(/[,;]/g, m => "\\" + m);
+  const ics = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//OlParkNow//KO","BEGIN:VEVENT",
+    `UID:olpark-${ymd}-${best.hour}@olpark-now`, `DTSTAMP:${stamp}`,
+    `DTSTART:${utc(d.date, best.hour)}`, `DTEND:${utc(d.date, best.hour + 1)}`,
+    `SUMMARY:${t.calTitle}`, "LOCATION:Olympic Park\\, 424 Olympic-ro\\, Songpa-gu\\, Seoul", `DESCRIPTION:${desc}`,
+    "BEGIN:VALARM","TRIGGER:-PT2H","ACTION:DISPLAY",`DESCRIPTION:${t.calTitle}`,"END:VALARM","END:VEVENT","END:VCALENDAR"].join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([ics], { type:"text/calendar" })); a.download = `olpark-${d.date}.ics`; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+async function share() {
+  const url = shareUrl();
+  if (navigator.share) { try { await navigator.share({ title: T[lang].title, url }); return; } catch (e) { if (e.name === "AbortError") return; } }
+  await navigator.clipboard.writeText(url); toast(T[lang].copied);
+}
+
+function render() {
+  const t = T[lang], I = F.insights, b = F.backtest;
+  document.documentElement.lang = lang; $("lang").value = lang; document.title = `${t.title} · OlPark Now`;
+  document.querySelectorAll("[data-t]").forEach(e => e.textContent = t[e.dataset.t]);
+  const notes = [F.demo && t.demo].filter(Boolean);
+  $("note").hidden = !notes.length; $("note").textContent = notes.join(" ");
+  document.querySelectorAll("[data-tab]").forEach(btn => btn.setAttribute("aria-selected", btn.dataset.tab===tab));
+  document.querySelectorAll("[data-panel]").forEach(p => p.hidden = p.dataset.panel!==tab);
+
+  $("kpis").innerHTML = [[n(F.history_rows), t.kRows],[n(I.shows), t.kShows],[`${n(I.top_days[0].peak)} ${t.cars}`, t.kPeak],[`${n(F.thresholds["만차"])} ${t.cars}`, t.kFull]]
+    .map(([v,l]) => `<div class="kpi"><b>${v}</b><span>${l}</span></div>`).join("");
+
+  // visitor
+  const g = $("grid"); g.innerHTML = "<div></div>" + F.days[0].hours.map(h=>`<div class="h">${h.hour}</div>`).join("");
+  F.days.forEach((d,i) => {
+    g.insertAdjacentHTML("beforeend", `<div class="d ${i===sel?"sel":""}" data-i="${i}" title="${esc(d.event||"")}">${dayLabel(d.date)}${d.event?` <span class="ev">●</span>`:""}</div>`);
+    d.hours.forEach(h => g.insertAdjacentHTML("beforeend", `<div class="c ${h.grade} ${i===sel?"sel":""}" data-i="${i}" title="${dayLabel(d.date)} ${hh(h.hour)} · ${n(h.cars)} ${t.cars} · ${t[h.grade]}"></div>`));
+  });
+  $("legend").innerHTML = ["원활","혼잡","만차"].map(k=>`<span><i class="c ${k}"></i>${t[k]}</span>`).join("") + `<span><span class="ev">●</span> ${t.show}</span>`;
+
+  const d = F.days[sel], { best, peak, full } = dayPlan(d);
+  $("dayTitle").textContent = dayLabel(d.date);
+  barChart($("dayChart"), d.hours);
+  // ponytail: show end = start + 2h (typical concert length); replace with gate exit data (id 659)
+  const end = d.start ? hh(d.start + 2) : null;
+  $("advice").innerHTML = `
+    <div class="mute">${t.best}</div><div class="big">${hh(best.hour)} · ${n(best.cars)} ${t.cars}</div>
+    <ul class="tips">
+      ${peak.grade==="원활" ? `<li>${t.noPeak}</li>` : `<li>${t.peak}: ${hh(peak.hour)} · ${n(peak.cars)} ${t.cars} <span class="pill ${peak.grade}">${t[peak.grade]}</span></li>`}
+      ${full.length ? `<li>${t.fullHours(full.length)} · ${t.transit}</li>` : ""}
+      ${end ? `<li>${t.exit(end)}</li>` : ""}
+    </ul>`;
+
+  const evs = d.events || [];
+  $("showsWrap").hidden = !evs.length;
+  $("shows").innerHTML = evs.map(e => `
+    <div class="card show">
+      <div class="venue">${esc(e.venue)}${e.big ? "" : `<span class="tag">${t.smallHall}</span>`}</div>
+      <b>${esc(e.name)}</b>
+      <div class="mute">${t.start} ${hh(e.start)} · <a href="${esc(e.url)}" target="_blank" rel="noopener">${t.official}</a></div>
+      <div class="hist">${e.history.length
+        ? `<div class="mute">${t.hist}</div>` + e.history.slice(0,3).map(h => `<div>${t.histRow(dayLabel(h.date), hh(h.peak_hour), n(h.peak))} <span class="pill ${h.peak >= F.thresholds["만차"] ? "만차" : h.peak >= F.thresholds["혼잡"] ? "혼잡" : "원활"}">${t[h.peak >= F.thresholds["만차"] ? "만차" : h.peak >= F.thresholds["혼잡"] ? "혼잡" : "원활"]}</span></div>`).join("")
+        : `<span class="mute">${t.noHist}</span>`}</div>
+    </div>`).join("");
+
+  // ops
+  $("opsTable").innerHTML = `<tr><th>${t.oDate}</th><th>${t.oPeak}</th><th class="n">${t.oFull}</th><th>${t.oAct}</th></tr>` +
+    F.days.map(d => { const { peak: p, full: f } = dayPlan(d);
+      const act = f.length ? t.actFull : p.grade==="혼잡" ? t.actBusy : t.actOk;
+      return `<tr><td>${dayLabel(d.date)}${d.event?`<div class="mute">${esc(d.event)}</div>`:""}</td><td>${hh(p.hour)} · ${n(p.cars)} <span class="pill ${p.grade}">${t[p.grade]}</span></td><td class="n">${f.length}</td><td>${act}</td></tr>`; }).join("");
+
+  // data
+  const pk = I.weekday_profile.reduce((a,c) => (c.show - c.none) > (a.show - a.none) ? c : a);
+  $("showLead").textContent = t.showLead(pk.hour, n(pk.show), n(pk.none), Math.round((pk.show/pk.none-1)*100));
+  lineChart($("profileChart"), I.weekday_profile);
+  const rp = Math.round((I.rain.wet/I.rain.dry-1)*100);
+  $("rain").innerHTML = `<div class="big">${rp}%</div><div class="mute">${t.rainTxt(n(I.rain.wet), n(I.rain.dry), rp)}</div>`;
+  $("acc").innerHTML = `<div class="big">±${n(b.mae_model)} ${t.cars}</div><div class="mute">${t.accTxt({...b, n:n(b.n), mae_model:n(b.mae_model), mae_naive:n(b.mae_naive), mean_cars:n(b.mean_cars)})}</div><p class="mute">${t.accNext}</p>`;
+  $("topTable").innerHTML = `<tr><th>${t.tDate}</th><th class="n">${t.tPeak}</th><th class="n">${t.tHour}</th><th>${t.tShow}</th></tr>` +
+    I.top_days.map(r => `<tr><td>${dayLabel(r.date)}</td><td class="n">${n(r.peak)}</td><td class="n">${hh(r.peak_hour)}</td><td>${esc(r.show||"-")}</td></tr>`).join("");
+  $("meta").textContent = t.meta(n(F.history_rows), F.generated);
+}
+
+$("grid").addEventListener("click", e => { const i = e.target.closest("[data-i]")?.dataset.i; if (i !== undefined) { sel = +i; render(); } });
+document.querySelector(".tabs").addEventListener("click", e => { const b = e.target.closest("[data-tab]"); if (b) { tab = b.dataset.tab; render(); } });
+$("lang").onchange = e => { lang = e.target.value; render(); };
+$("ics").onclick = downloadIcs; $("share").onclick = share;
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => F && render());
+fetch("data/forecast.json").then(r => r.json()).then(f => {
+  F = f;
+  const want = f.days.findIndex(d => d.date === P.get("d"));
+  sel = want >= 0 ? want : Math.max(0, f.days.findIndex(d => d.event));
+  render();
+});
+</script>
+</body>
+</html>

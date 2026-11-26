@@ -1,0 +1,848 @@
+{
+ "generated": "2026-11-24T15:20",
+ "thresholds": {
+  "혼잡": 1886.0,
+  "만차": 2338.0
+ },
+ "history_rows": 5758,
+ "days": [
+  {
+   "date": "2026-11-24",
+   "event": null,
+   "start": null,
+   "hours": [
+    {
+     "hour": 8,
+     "cars": 1898,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 9,
+     "cars": 2321,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 10,
+     "cars": 2398,
+     "grade": "만차"
+    },
+    {
+     "hour": 11,
+     "cars": 2159,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 12,
+     "cars": 2080,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 13,
+     "cars": 2205,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 14,
+     "cars": 2231,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 15,
+     "cars": 2156,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 16,
+     "cars": 1956,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 17,
+     "cars": 1728,
+     "grade": "원활"
+    },
+    {
+     "hour": 18,
+     "cars": 1314,
+     "grade": "원활"
+    },
+    {
+     "hour": 19,
+     "cars": 1243,
+     "grade": "원활"
+    },
+    {
+     "hour": 20,
+     "cars": 1111,
+     "grade": "원활"
+    },
+    {
+     "hour": 21,
+     "cars": 729,
+     "grade": "원활"
+    },
+    {
+     "hour": 22,
+     "cars": 448,
+     "grade": "원활"
+    },
+    {
+     "hour": 23,
+     "cars": 428,
+     "grade": "원활"
+    }
+   ],
+   "events": []
+  },
+  {
+   "date": "2026-11-25",
+   "event": null,
+   "start": null,
+   "hours": [
+    {
+     "hour": 8,
+     "cars": 1898,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 9,
+     "cars": 2321,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 10,
+     "cars": 2398,
+     "grade": "만차"
+    },
+    {
+     "hour": 11,
+     "cars": 2159,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 12,
+     "cars": 2080,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 13,
+     "cars": 2205,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 14,
+     "cars": 2231,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 15,
+     "cars": 2156,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 16,
+     "cars": 1956,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 17,
+     "cars": 1728,
+     "grade": "원활"
+    },
+    {
+     "hour": 18,
+     "cars": 1314,
+     "grade": "원활"
+    },
+    {
+     "hour": 19,
+     "cars": 1243,
+     "grade": "원활"
+    },
+    {
+     "hour": 20,
+     "cars": 1111,
+     "grade": "원활"
+    },
+    {
+     "hour": 21,
+     "cars": 729,
+     "grade": "원활"
+    },
+    {
+     "hour": 22,
+     "cars": 448,
+     "grade": "원활"
+    },
+    {
+     "hour": 23,
+     "cars": 428,
+     "grade": "원활"
+    }
+   ],
+   "events": []
+  },
+  {
+   "date": "2026-11-26",
+   "event": null,
+   "start": null,
+   "hours": [
+    {
+     "hour": 8,
+     "cars": 1898,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 9,
+     "cars": 2321,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 10,
+     "cars": 2398,
+     "grade": "만차"
+    },
+    {
+     "hour": 11,
+     "cars": 2159,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 12,
+     "cars": 2080,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 13,
+     "cars": 2205,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 14,
+     "cars": 2231,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 15,
+     "cars": 2156,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 16,
+     "cars": 1956,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 17,
+     "cars": 1728,
+     "grade": "원활"
+    },
+    {
+     "hour": 18,
+     "cars": 1314,
+     "grade": "원활"
+    },
+    {
+     "hour": 19,
+     "cars": 1243,
+     "grade": "원활"
+    },
+    {
+     "hour": 20,
+     "cars": 1111,
+     "grade": "원활"
+    },
+    {
+     "hour": 21,
+     "cars": 729,
+     "grade": "원활"
+    },
+    {
+     "hour": 22,
+     "cars": 448,
+     "grade": "원활"
+    },
+    {
+     "hour": 23,
+     "cars": 428,
+     "grade": "원활"
+    }
+   ],
+   "events": []
+  },
+  {
+   "date": "2026-11-27",
+   "event": "[서울] 2026 조용필 ＆ 위대한탄생 콘서트 · 2026 다이나믹 듀오 단독 콘서트 ＂가끔씩 오래 보자＂ - 서울",
+   "start": 19,
+   "hours": [
+    {
+     "hour": 8,
+     "cars": 1820,
+     "grade": "원활"
+    },
+    {
+     "hour": 9,
+     "cars": 2256,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 10,
+     "cars": 2384,
+     "grade": "만차"
+    },
+    {
+     "hour": 11,
+     "cars": 2169,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 12,
+     "cars": 2111,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 13,
+     "cars": 2269,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 14,
+     "cars": 2335,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 15,
+     "cars": 2310,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 16,
+     "cars": 2177,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 17,
+     "cars": 2068,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 18,
+     "cars": 1844,
+     "grade": "원활"
+    },
+    {
+     "hour": 19,
+     "cars": 1815,
+     "grade": "원활"
+    },
+    {
+     "hour": 20,
+     "cars": 1712,
+     "grade": "원활"
+    },
+    {
+     "hour": 21,
+     "cars": 1389,
+     "grade": "원활"
+    },
+    {
+     "hour": 22,
+     "cars": 845,
+     "grade": "원활"
+    },
+    {
+     "hour": 23,
+     "cars": 498,
+     "grade": "원활"
+    }
+   ],
+   "events": [
+    {
+     "date": "2026-11-27",
+     "name": "[서울] 2026 조용필 ＆ 위대한탄생 콘서트",
+     "venue": "KSPO DOME",
+     "start": 19,
+     "big": true,
+     "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5159",
+     "history": []
+    },
+    {
+     "date": "2026-11-27",
+     "name": "2026 다이나믹 듀오 단독 콘서트 ＂가끔씩 오래 보자＂ - 서울",
+     "venue": "올림픽홀",
+     "start": 20,
+     "big": true,
+     "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5168",
+     "history": []
+    }
+   ]
+  },
+  {
+   "date": "2026-11-28",
+   "event": "[서울] 2026 조용필 ＆ 위대한탄생 콘서트 · 2026 다이나믹 듀오 단독 콘서트 ＂가끔씩 오래 보자＂ - 서울",
+   "start": 18,
+   "hours": [
+    {
+     "hour": 8,
+     "cars": 978,
+     "grade": "원활"
+    },
+    {
+     "hour": 9,
+     "cars": 1331,
+     "grade": "원활"
+    },
+    {
+     "hour": 10,
+     "cars": 1604,
+     "grade": "원활"
+    },
+    {
+     "hour": 11,
+     "cars": 1766,
+     "grade": "원활"
+    },
+    {
+     "hour": 12,
+     "cars": 1841,
+     "grade": "원활"
+    },
+    {
+     "hour": 13,
+     "cars": 2105,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 14,
+     "cars": 2356,
+     "grade": "만차"
+    },
+    {
+     "hour": 15,
+     "cars": 2472,
+     "grade": "만차"
+    },
+    {
+     "hour": 16,
+     "cars": 2401,
+     "grade": "만차"
+    },
+    {
+     "hour": 17,
+     "cars": 2102,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 18,
+     "cars": 1811,
+     "grade": "원활"
+    },
+    {
+     "hour": 19,
+     "cars": 1587,
+     "grade": "원활"
+    },
+    {
+     "hour": 20,
+     "cars": 1181,
+     "grade": "원활"
+    },
+    {
+     "hour": 21,
+     "cars": 690,
+     "grade": "원활"
+    },
+    {
+     "hour": 22,
+     "cars": 443,
+     "grade": "원활"
+    },
+    {
+     "hour": 23,
+     "cars": 406,
+     "grade": "원활"
+    }
+   ],
+   "events": [
+    {
+     "date": "2026-11-28",
+     "name": "최현우 30주년 기념 공연 - LEGACY",
+     "venue": "올림픽공원 우리금융아트홀",
+     "start": 15,
+     "big": false,
+     "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136",
+     "history": []
+    },
+    {
+     "date": "2026-11-28",
+     "name": "[서울] 2026 조용필 ＆ 위대한탄생 콘서트",
+     "venue": "KSPO DOME",
+     "start": 18,
+     "big": true,
+     "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5159",
+     "history": []
+    },
+    {
+     "date": "2026-11-28",
+     "name": "2026 다이나믹 듀오 단독 콘서트 ＂가끔씩 오래 보자＂ - 서울",
+     "venue": "올림픽홀",
+     "start": 18,
+     "big": true,
+     "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5168",
+     "history": []
+    }
+   ]
+  },
+  {
+   "date": "2026-11-29",
+   "event": "[서울] 2026 조용필 ＆ 위대한탄생 콘서트 · 2026 다이나믹 듀오 단독 콘서트 ＂가끔씩 오래 보자＂ - 서울",
+   "start": 17,
+   "hours": [
+    {
+     "hour": 8,
+     "cars": 978,
+     "grade": "원활"
+    },
+    {
+     "hour": 9,
+     "cars": 1331,
+     "grade": "원활"
+    },
+    {
+     "hour": 10,
+     "cars": 1604,
+     "grade": "원활"
+    },
+    {
+     "hour": 11,
+     "cars": 1766,
+     "grade": "원활"
+    },
+    {
+     "hour": 12,
+     "cars": 1841,
+     "grade": "원활"
+    },
+    {
+     "hour": 13,
+     "cars": 2105,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 14,
+     "cars": 2356,
+     "grade": "만차"
+    },
+    {
+     "hour": 15,
+     "cars": 2472,
+     "grade": "만차"
+    },
+    {
+     "hour": 16,
+     "cars": 2401,
+     "grade": "만차"
+    },
+    {
+     "hour": 17,
+     "cars": 2102,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 18,
+     "cars": 1811,
+     "grade": "원활"
+    },
+    {
+     "hour": 19,
+     "cars": 1587,
+     "grade": "원활"
+    },
+    {
+     "hour": 20,
+     "cars": 1181,
+     "grade": "원활"
+    },
+    {
+     "hour": 21,
+     "cars": 690,
+     "grade": "원활"
+    },
+    {
+     "hour": 22,
+     "cars": 443,
+     "grade": "원활"
+    },
+    {
+     "hour": 23,
+     "cars": 406,
+     "grade": "원활"
+    }
+   ],
+   "events": [
+    {
+     "date": "2026-11-29",
+     "name": "최현우 30주년 기념 공연 - LEGACY",
+     "venue": "올림픽공원 우리금융아트홀",
+     "start": 14,
+     "big": false,
+     "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136",
+     "history": []
+    },
+    {
+     "date": "2026-11-29",
+     "name": "[서울] 2026 조용필 ＆ 위대한탄생 콘서트",
+     "venue": "KSPO DOME",
+     "start": 17,
+     "big": true,
+     "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5159",
+     "history": []
+    },
+    {
+     "date": "2026-11-29",
+     "name": "2026 다이나믹 듀오 단독 콘서트 ＂가끔씩 오래 보자＂ - 서울",
+     "venue": "올림픽홀",
+     "start": 17,
+     "big": true,
+     "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5168",
+     "history": []
+    }
+   ]
+  },
+  {
+   "date": "2026-11-30",
+   "event": null,
+   "start": null,
+   "hours": [
+    {
+     "hour": 8,
+     "cars": 1898,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 9,
+     "cars": 2321,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 10,
+     "cars": 2398,
+     "grade": "만차"
+    },
+    {
+     "hour": 11,
+     "cars": 2159,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 12,
+     "cars": 2080,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 13,
+     "cars": 2205,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 14,
+     "cars": 2231,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 15,
+     "cars": 2156,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 16,
+     "cars": 1956,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 17,
+     "cars": 1728,
+     "grade": "원활"
+    },
+    {
+     "hour": 18,
+     "cars": 1314,
+     "grade": "원활"
+    },
+    {
+     "hour": 19,
+     "cars": 1243,
+     "grade": "원활"
+    },
+    {
+     "hour": 20,
+     "cars": 1111,
+     "grade": "원활"
+    },
+    {
+     "hour": 21,
+     "cars": 729,
+     "grade": "원활"
+    },
+    {
+     "hour": 22,
+     "cars": 448,
+     "grade": "원활"
+    },
+    {
+     "hour": 23,
+     "cars": 428,
+     "grade": "원활"
+    }
+   ],
+   "events": []
+  }
+ ],
+ "backtest": {
+  "test": "2025-10~12",
+  "n": 432,
+  "mae_model": 306,
+  "mae_naive": 350,
+  "mean_cars": 1728
+ },
+ "insights": {
+  "weekday_profile": [
+   {
+    "hour": 6,
+    "show": 1021,
+    "none": 1057
+   },
+   {
+    "hour": 7,
+    "show": 1124,
+    "none": 1158
+   },
+   {
+    "hour": 8,
+    "show": 1820,
+    "none": 1898
+   },
+   {
+    "hour": 9,
+    "show": 2256,
+    "none": 2321
+   },
+   {
+    "hour": 10,
+    "show": 2384,
+    "none": 2398
+   },
+   {
+    "hour": 11,
+    "show": 2169,
+    "none": 2159
+   },
+   {
+    "hour": 12,
+    "show": 2111,
+    "none": 2080
+   },
+   {
+    "hour": 13,
+    "show": 2269,
+    "none": 2205
+   },
+   {
+    "hour": 14,
+    "show": 2335,
+    "none": 2231
+   },
+   {
+    "hour": 15,
+    "show": 2310,
+    "none": 2156
+   },
+   {
+    "hour": 16,
+    "show": 2177,
+    "none": 1956
+   },
+   {
+    "hour": 17,
+    "show": 2068,
+    "none": 1728
+   },
+   {
+    "hour": 18,
+    "show": 1844,
+    "none": 1314
+   },
+   {
+    "hour": 19,
+    "show": 1815,
+    "none": 1243
+   },
+   {
+    "hour": 20,
+    "show": 1712,
+    "none": 1111
+   },
+   {
+    "hour": 21,
+    "show": 1389,
+    "none": 729
+   },
+   {
+    "hour": 22,
+    "show": 845,
+    "none": 448
+   },
+   {
+    "hour": 23,
+    "show": 498,
+    "none": 428
+   }
+  ],
+  "rain": {
+   "wet": 1757,
+   "dry": 2109
+  },
+  "top_days": [
+   {
+    "date": "2025-04-06",
+    "peak": 4359,
+    "peak_hour": 15,
+    "show": "EUNHYUK LIVE TOUR 2025 -Limitless: Time- Special in SEOUL, 2025 IVE THE 3RD FAN CONCERT 〈IVE SCOUT〉"
+   },
+   {
+    "date": "2025-11-01",
+    "peak": 4050,
+    "peak_hour": 15,
+    "show": "IVE WORLD TOUR [SHOW WHAT I AM], 2025 THE신승훈SHOW 〈SINCERELY 35〉"
+   },
+   {
+    "date": "2025-05-18",
+    "peak": 4044,
+    "peak_hour": 15,
+    "show": "2025 KAI SOLO CONCERT TOUR 〈KAION〉 IN SEOUL"
+   },
+   {
+    "date": "2025-10-19",
+    "peak": 3963,
+    "peak_hour": 15,
+    "show": "그랜드 민트 페스티벌 2025"
+   },
+   {
+    "date": "2025-05-25",
+    "peak": 3697,
+    "peak_hour": 16,
+    "show": "2025 Jay Park World Tour [Serenades & Body Rolls], [서울] 2025 멜로망스 전국투어 콘서트 〈Romance Station〉"
+   },
+   {
+    "date": "2025-11-02",
+    "peak": 3672,
+    "peak_hour": 15,
+    "show": "IVE WORLD TOUR [SHOW WHAT I AM]"
+   }
+  ],
+  "shows": 114,
+  "show_days": 97
+ },
+ "events_sample": false,
+ "demo": false
+}
