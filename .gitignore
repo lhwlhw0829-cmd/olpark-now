@@ -1,3 +1,6 @@
 .env
 __pycache__/
 submission/
+tools/node_modules/
+tools/frames/
+tools/*.mp4
