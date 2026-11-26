@@ -130,7 +130,7 @@ const T = {
         kRows:"학습한 시간대 데이터", kShows:"학습 데이터 속 공연", kPeak:"연중 최고 주차 대수", kFull:"만차 기준(상위 10%)",
         opsTitle:"주간 운영 권고", opsLead:"날짜별 피크와 만차 시간을 보고 인력·임시주차장 배치를 미리 정할 수 있습니다.",
         oDate:"날짜", oPeak:"피크", oFull:"만차 시간", oAct:"권고",
-        actFull:"임시주차장 개방 + 출차 유도 인력 배치", actBusy:"주차 안내 인력 증원", actOk:"평시 운영",
+        actFull:"임시주차장 개방 + 출차 유도 인력 배치", actBusy:"주차 안내 인력 증원", actOk:"평시 운영", actRoutine:"정례 오전 피크 · 평시 인력으로 안내",
         showEff:"공연이 있는 평일 저녁, 주차가 크게 늘어납니다",
         showLead:(h,a,b,p)=>`평일 ${h}시 평균: 공연일 ${a}대, 비공연일 ${b}대 (+${p}%).`,
         showDay:"공연일 (평일)", noShowDay:"비공연일 (평일)",
@@ -155,7 +155,7 @@ const T = {
         kRows:"hours of training data", kShows:"shows in training data", kPeak:"peak parked cars", kFull:"'Full' threshold (top 10%)",
         opsTitle:"Weekly operating advice", opsLead:"Plan staff and overflow parking from each day's peak and full hours.",
         oDate:"Date", oPeak:"Peak", oFull:"Full hours", oAct:"Advice",
-        actFull:"Open overflow lot + exit-flow staff", actBusy:"Add parking guides", actOk:"Normal operation",
+        actFull:"Open overflow lot + exit-flow staff", actBusy:"Add parking guides", actOk:"Normal operation", actRoutine:"Routine morning peak · normal staffing",
         showEff:"Weekday shows sharply raise evening parking",
         showLead:(h,a,b,p)=>`Weekday ${h}:00 average: ${a} cars on show days vs ${b} otherwise (+${p}%).`,
         showDay:"Show day (weekday)", noShowDay:"No show (weekday)",
@@ -180,7 +180,7 @@ const T = {
         kRows:"学習した時間帯データ", kShows:"学習データ内の公演", kPeak:"年間最大駐車台数", kFull:"満車基準(上位10%)",
         opsTitle:"週間運営アドバイス", opsLead:"日別のピークと満車時間から、人員・臨時駐車場の配置を事前に決められます。",
         oDate:"日付", oPeak:"ピーク", oFull:"満車時間", oAct:"アドバイス",
-        actFull:"臨時駐車場を開放 + 出庫誘導の人員配置", actBusy:"駐車案内の人員を増員", actOk:"通常運営",
+        actFull:"臨時駐車場を開放 + 出庫誘導の人員配置", actBusy:"駐車案内の人員を増員", actOk:"通常運営", actRoutine:"定例の午前ピーク · 通常人員で案内",
         showEff:"公演のある平日の夜は駐車が大きく増えます",
         showLead:(h,a,b,p)=>`平日${h}時の平均:公演日${a}台、公演なし${b}台 (+${p}%)。`,
         showDay:"公演日(平日)", noShowDay:"公演なし(平日)",
@@ -205,7 +205,7 @@ const T = {
         kRows:"训练用时段数据", kShows:"训练数据中的演出", kPeak:"全年最高停车数量", kFull:"已满标准(前10%)",
         opsTitle:"每周运营建议", opsLead:"根据每天的高峰和已满时段,提前安排人员与临时停车场。",
         oDate:"日期", oPeak:"高峰", oFull:"已满时段", oAct:"建议",
-        actFull:"开放临时停车场 + 安排离场引导人员", actBusy:"增加停车引导人员", actOk:"正常运营",
+        actFull:"开放临时停车场 + 安排离场引导人员", actBusy:"增加停车引导人员", actOk:"正常运营", actRoutine:"例行上午高峰 · 常规人员引导",
         showEff:"有演出的工作日晚上,停车量大幅增加",
         showLead:(h,a,b,p)=>`工作日${h}点平均:演出日${a}辆,无演出日${b}辆(+${p}%)。`,
         showDay:"演出日(工作日)", noShowDay:"无演出(工作日)",
@@ -333,7 +333,8 @@ function render() {
   // ops
   $("opsTable").innerHTML = `<tr><th>${t.oDate}</th><th>${t.oPeak}</th><th class="n">${t.oFull}</th><th>${t.oAct}</th></tr>` +
     F.days.map(d => { const { peak: p, full: f } = dayPlan(d);
-      const act = f.length ? t.actFull : p.grade==="혼잡" ? t.actBusy : t.actOk;
+      // a show day with full hours is the exception to staff for; weekday ~10:00 is full most days (median 2,448 cars)
+      const act = f.length ? (d.event ? t.actFull : t.actRoutine) : p.grade==="혼잡" ? t.actBusy : t.actOk;
       return `<tr><td>${dayLabel(d.date)}${d.event?`<div class="mute">${esc(d.event)}</div>`:""}</td><td>${hh(p.hour)} · ${n(p.cars)} <span class="pill ${p.grade}">${t[p.grade]}</span></td><td class="n">${f.length}</td><td>${act}</td></tr>`; }).join("");
 
   // data
