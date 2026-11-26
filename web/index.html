@@ -217,7 +217,7 @@ const T = {
         meta:(n,g)=>`训练${n}小时(2025年,已剔除采集异常日) · 生成于 ${g} · 来源:韩国体育产业开发 奥林匹克公园车辆进出·演出·天气关联数据、奥林匹克公园演出日程` },
 };
 const P = new URLSearchParams(location.search);
-let lang = T[P.get("lang")] ? P.get("lang") : "ko", F, sel = 0, tab = "visitor";
+let lang = T[P.get("lang")] ? P.get("lang") : "ko", F, sel = 0, tab = ["visitor","ops","data"].includes(P.get("tab")) ? P.get("tab") : "visitor";
 const $ = id => document.getElementById(id), hh = h => `${String(h).padStart(2,"0")}:00`;
 const n = x => Math.round(x).toLocaleString(T[lang].locale);
 const dayLabel = d => new Date(d+"T00:00").toLocaleDateString(T[lang].locale,{month:"numeric",day:"numeric",weekday:"short"});
