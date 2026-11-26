@@ -1,187 +1,11 @@
 {
- "generated": "2026-11-24T15:20",
+ "generated": "2026-11-26 13:22 KST",
  "thresholds": {
   "혼잡": 1886.0,
   "만차": 2338.0
  },
  "history_rows": 5758,
  "days": [
-  {
-   "date": "2026-11-24",
-   "event": null,
-   "start": null,
-   "hours": [
-    {
-     "hour": 8,
-     "cars": 1898,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 9,
-     "cars": 2321,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 10,
-     "cars": 2398,
-     "grade": "만차"
-    },
-    {
-     "hour": 11,
-     "cars": 2159,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 12,
-     "cars": 2080,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 13,
-     "cars": 2205,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 14,
-     "cars": 2231,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 15,
-     "cars": 2156,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 16,
-     "cars": 1956,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 17,
-     "cars": 1728,
-     "grade": "원활"
-    },
-    {
-     "hour": 18,
-     "cars": 1314,
-     "grade": "원활"
-    },
-    {
-     "hour": 19,
-     "cars": 1243,
-     "grade": "원활"
-    },
-    {
-     "hour": 20,
-     "cars": 1111,
-     "grade": "원활"
-    },
-    {
-     "hour": 21,
-     "cars": 729,
-     "grade": "원활"
-    },
-    {
-     "hour": 22,
-     "cars": 448,
-     "grade": "원활"
-    },
-    {
-     "hour": 23,
-     "cars": 428,
-     "grade": "원활"
-    }
-   ],
-   "events": []
-  },
-  {
-   "date": "2026-11-25",
-   "event": null,
-   "start": null,
-   "hours": [
-    {
-     "hour": 8,
-     "cars": 1898,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 9,
-     "cars": 2321,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 10,
-     "cars": 2398,
-     "grade": "만차"
-    },
-    {
-     "hour": 11,
-     "cars": 2159,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 12,
-     "cars": 2080,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 13,
-     "cars": 2205,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 14,
-     "cars": 2231,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 15,
-     "cars": 2156,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 16,
-     "cars": 1956,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 17,
-     "cars": 1728,
-     "grade": "원활"
-    },
-    {
-     "hour": 18,
-     "cars": 1314,
-     "grade": "원활"
-    },
-    {
-     "hour": 19,
-     "cars": 1243,
-     "grade": "원활"
-    },
-    {
-     "hour": 20,
-     "cars": 1111,
-     "grade": "원활"
-    },
-    {
-     "hour": 21,
-     "cars": 729,
-     "grade": "원활"
-    },
-    {
-     "hour": 22,
-     "cars": 448,
-     "grade": "원활"
-    },
-    {
-     "hour": 23,
-     "cars": 428,
-     "grade": "원활"
-    }
-   ],
-   "events": []
-  },
   {
    "date": "2026-11-26",
    "event": null,
@@ -696,6 +520,192 @@
     }
    ],
    "events": []
+  },
+  {
+   "date": "2026-12-01",
+   "event": null,
+   "start": null,
+   "hours": [
+    {
+     "hour": 8,
+     "cars": 1898,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 9,
+     "cars": 2321,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 10,
+     "cars": 2398,
+     "grade": "만차"
+    },
+    {
+     "hour": 11,
+     "cars": 2159,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 12,
+     "cars": 2080,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 13,
+     "cars": 2205,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 14,
+     "cars": 2231,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 15,
+     "cars": 2156,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 16,
+     "cars": 1956,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 17,
+     "cars": 1728,
+     "grade": "원활"
+    },
+    {
+     "hour": 18,
+     "cars": 1314,
+     "grade": "원활"
+    },
+    {
+     "hour": 19,
+     "cars": 1243,
+     "grade": "원활"
+    },
+    {
+     "hour": 20,
+     "cars": 1111,
+     "grade": "원활"
+    },
+    {
+     "hour": 21,
+     "cars": 729,
+     "grade": "원활"
+    },
+    {
+     "hour": 22,
+     "cars": 448,
+     "grade": "원활"
+    },
+    {
+     "hour": 23,
+     "cars": 428,
+     "grade": "원활"
+    }
+   ],
+   "events": []
+  },
+  {
+   "date": "2026-12-02",
+   "event": null,
+   "start": null,
+   "hours": [
+    {
+     "hour": 8,
+     "cars": 1898,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 9,
+     "cars": 2321,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 10,
+     "cars": 2398,
+     "grade": "만차"
+    },
+    {
+     "hour": 11,
+     "cars": 2159,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 12,
+     "cars": 2080,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 13,
+     "cars": 2205,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 14,
+     "cars": 2231,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 15,
+     "cars": 2156,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 16,
+     "cars": 1956,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 17,
+     "cars": 1728,
+     "grade": "원활"
+    },
+    {
+     "hour": 18,
+     "cars": 1314,
+     "grade": "원활"
+    },
+    {
+     "hour": 19,
+     "cars": 1243,
+     "grade": "원활"
+    },
+    {
+     "hour": 20,
+     "cars": 1111,
+     "grade": "원활"
+    },
+    {
+     "hour": 21,
+     "cars": 729,
+     "grade": "원활"
+    },
+    {
+     "hour": 22,
+     "cars": 448,
+     "grade": "원활"
+    },
+    {
+     "hour": 23,
+     "cars": 428,
+     "grade": "원활"
+    }
+   ],
+   "events": [
+    {
+     "date": "2026-12-02",
+     "name": "최현우 30주년 기념 공연 - LEGACY",
+     "venue": "올림픽공원 우리금융아트홀",
+     "start": 19,
+     "big": false,
+     "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136",
+     "history": []
+    }
+   ]
   }
  ],
  "backtest": {

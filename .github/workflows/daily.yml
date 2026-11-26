@@ -1,0 +1,54 @@
+name: daily forecast
+
+on:
+  schedule:
+    - cron: "0 21 * * *"   # 06:00 KST
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Self-check
+        run: python pipeline/olpark.py test
+      - name: Show schedule (keeps the last good copy if the site is unreachable)
+        run: python pipeline/olpark.py schedule || echo "schedule fetch failed; using committed data/events.json"
+      - name: Forecast
+        run: python pipeline/olpark.py forecast
+      # Committing the refreshed data keeps the repo active, so GitHub doesn't pause this schedule after 60 idle days.
+      - name: Commit refreshed data
+        if: github.event_name != 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/events.json web/data/forecast.json
+          git diff --cached --quiet || git commit -m "daily: refresh schedule and forecast"
+          git push
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

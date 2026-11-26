@@ -8,7 +8,7 @@ Usage:
 """
 import json, os, sys, random, statistics, time, urllib.error, urllib.parse, urllib.request
 import xml.etree.ElementTree as ET
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -17,6 +17,7 @@ EVENTS = ROOT / "data" / "events.json"  # [{"date":"YYYY-MM-DD","name":"...","st
 OUT = ROOT / "web" / "data" / "forecast.json"
 API = "https://api.kcisa.kr/openapi/API_CPM_009/request"  # culture.go.kr id=675 (data.go.kr 15164822)
 HOURS = range(8, 24)
+KST = timezone(timedelta(hours=9))  # CI runs in UTC; the park runs on Korean time
 NUM = ("주차대수", "방문객", "기온", "풍향", "강수량", "습도", "공연관람객수")
 
 
@@ -274,7 +275,7 @@ def forecast(rows, start, events, days=7):
         out.append({"date": day.isoformat(), "event": " · ".join(e["name"] for e in big) or None,
                     "start": min((e["start"] for e in big), default=None), "hours": hours,
                     "events": [dict(e, history=past_shows(e["name"], rows)) for e in es]})
-    return {"generated": datetime.now().isoformat(timespec="minutes"), "thresholds": {"혼잡": p70, "만차": p90},
+    return {"generated": datetime.now(KST).strftime("%Y-%m-%d %H:%M KST"), "thresholds": {"혼잡": p70, "만차": p90},
             "history_rows": len(rows), "days": out, "backtest": backtest(rows), "insights": insights(rows),
             "events_sample": any(e.get("sample") for e in events)}
 
@@ -324,7 +325,7 @@ if __name__ == "__main__":
         print(f"{len(evs)} show-days → {EVENTS}")
     elif cmd == "forecast":
         raw = json.loads(RAW.read_text())
-        start = date.fromisoformat(sys.argv[3]) if "--start" in sys.argv else date.today()
+        start = date.fromisoformat(sys.argv[3]) if "--start" in sys.argv else datetime.now(KST).date()
         events = json.loads(EVENTS.read_text()) if EVENTS.exists() else []
         f = forecast([parse_item(i) for i in raw["items"]], start, events)
         f["demo"] = raw["demo"]
