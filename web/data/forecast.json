@@ -1,118 +1,11 @@
 {
- "generated": "2026-11-27 12:28 KST",
+ "generated": "2026-11-28 12:04 KST",
  "thresholds": {
   "혼잡": 1886.0,
   "만차": 2338.0
  },
  "history_rows": 5758,
  "days": [
-  {
-   "date": "2026-11-27",
-   "event": "[서울] 2026 조용필 ＆ 위대한탄생 콘서트 · 2026 다이나믹 듀오 단독 콘서트 ＂가끔씩 오래 보자＂ - 서울",
-   "start": 19,
-   "hours": [
-    {
-     "hour": 8,
-     "cars": 1820,
-     "grade": "원활"
-    },
-    {
-     "hour": 9,
-     "cars": 2256,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 10,
-     "cars": 2384,
-     "grade": "만차"
-    },
-    {
-     "hour": 11,
-     "cars": 2169,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 12,
-     "cars": 2111,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 13,
-     "cars": 2269,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 14,
-     "cars": 2335,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 15,
-     "cars": 2310,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 16,
-     "cars": 2177,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 17,
-     "cars": 2068,
-     "grade": "혼잡"
-    },
-    {
-     "hour": 18,
-     "cars": 1844,
-     "grade": "원활"
-    },
-    {
-     "hour": 19,
-     "cars": 1815,
-     "grade": "원활"
-    },
-    {
-     "hour": 20,
-     "cars": 1712,
-     "grade": "원활"
-    },
-    {
-     "hour": 21,
-     "cars": 1389,
-     "grade": "원활"
-    },
-    {
-     "hour": 22,
-     "cars": 845,
-     "grade": "원활"
-    },
-    {
-     "hour": 23,
-     "cars": 498,
-     "grade": "원활"
-    }
-   ],
-   "events": [
-    {
-     "date": "2026-11-27",
-     "name": "[서울] 2026 조용필 ＆ 위대한탄생 콘서트",
-     "venue": "KSPO DOME",
-     "start": 19,
-     "big": true,
-     "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5159",
-     "history": []
-    },
-    {
-     "date": "2026-11-27",
-     "name": "2026 다이나믹 듀오 단독 콘서트 ＂가끔씩 오래 보자＂ - 서울",
-     "venue": "올림픽홀",
-     "start": 20,
-     "big": true,
-     "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5168",
-     "history": []
-    }
-   ]
-  },
   {
    "date": "2026-11-28",
    "event": "[서울] 2026 조용필 ＆ 위대한탄생 콘서트 · 2026 다이나믹 듀오 단독 콘서트 ＂가끔씩 오래 보자＂ - 서울",
@@ -708,6 +601,104 @@
    "events": [
     {
      "date": "2026-12-03",
+     "name": "최현우 30주년 기념 공연 - LEGACY",
+     "venue": "올림픽공원 우리금융아트홀",
+     "start": 19,
+     "big": false,
+     "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136",
+     "history": []
+    }
+   ]
+  },
+  {
+   "date": "2026-12-04",
+   "event": null,
+   "start": null,
+   "hours": [
+    {
+     "hour": 8,
+     "cars": 1898,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 9,
+     "cars": 2321,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 10,
+     "cars": 2398,
+     "grade": "만차"
+    },
+    {
+     "hour": 11,
+     "cars": 2159,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 12,
+     "cars": 2080,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 13,
+     "cars": 2205,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 14,
+     "cars": 2231,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 15,
+     "cars": 2156,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 16,
+     "cars": 1956,
+     "grade": "혼잡"
+    },
+    {
+     "hour": 17,
+     "cars": 1728,
+     "grade": "원활"
+    },
+    {
+     "hour": 18,
+     "cars": 1314,
+     "grade": "원활"
+    },
+    {
+     "hour": 19,
+     "cars": 1243,
+     "grade": "원활"
+    },
+    {
+     "hour": 20,
+     "cars": 1111,
+     "grade": "원활"
+    },
+    {
+     "hour": 21,
+     "cars": 729,
+     "grade": "원활"
+    },
+    {
+     "hour": 22,
+     "cars": 448,
+     "grade": "원활"
+    },
+    {
+     "hour": 23,
+     "cars": 428,
+     "grade": "원활"
+    }
+   ],
+   "events": [
+    {
+     "date": "2026-12-04",
      "name": "최현우 30주년 기념 공연 - LEGACY",
      "venue": "올림픽공원 우리금융아트홀",
      "start": 19,
